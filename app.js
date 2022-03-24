@@ -44,7 +44,7 @@ Product.belongsToMany(Cart, {through: CartItem});
 app.use(errorController.get404);
 
 sequelize
-  .sync({force: true})
+  .sync()
   .then(result => {
     User.findOne({ where: { id: 1 } });
   }).then(user => {
@@ -54,7 +54,6 @@ sequelize
     return user;
   })
   .then(user => {
-    console.log(user);
     app.listen(3000);
   })
   .catch(err => {
