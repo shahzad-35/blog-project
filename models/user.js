@@ -32,19 +32,22 @@ class User {
 
         const updateCart = { items: updatedCartItems };
         const db = getDb();
-        return db.collection('users').updateOne({ _id: new ObjectId(this._id) },
+        return db.collection('users')
+        .updateOne({ _id: new ObjectId(this._id) },
             { $set: { cart: updateCart } });
     }
 
     static findById(userId) {
         const db = getDb();
-        return db.collection('users').findOne({ _id: new ObjectId(userId) }).then(user => {
+        return db.collection('users')
+        .findOne({ _id: new ObjectId(userId) })
+        .then(user => {
             console.log(user);
             return user;
         })
-            .catch(err => {
-                console.log(err);
-            });
+        .catch(err => {
+            console.log(err);
+        });
     }
 
     getCart() {
@@ -66,6 +69,17 @@ class User {
                     };
                 });
             });
+    }
+
+    deleteItemFromCart(productId){
+        const updatedCartItems = this.cart.items.filter(item => {
+            return JSON.stringify(item.productId) !== JSON.stringify(productId);
+        });
+        const db = getDb();
+        return db.collection('users')
+        .updateOne(
+            { _id: new ObjectId(this._id) },
+            { $set: { cart: {items: updatedCartItems} } });
     }
 }
 
