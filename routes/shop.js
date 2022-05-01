@@ -22,4 +22,4 @@ router.get('/products', shopController.getProducts);
 
 // router.get('/orders', shopController.getOrders);
 
-module.exports = router;
+module.exports = router; 
