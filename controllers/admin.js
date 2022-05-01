@@ -13,7 +13,15 @@ exports.postAddProduct = (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
-  const product = new Product({ title: title, price: price, description: description, imageUrl: imageUrl });
+  const product = new Product(
+    { 
+      title: title,
+      price: price,
+      description: description,
+      imageUrl: imageUrl,
+      userId: req.user._id
+    }
+    );
   product
     .save()
     .then(result => {
@@ -74,6 +82,8 @@ exports.postEditProduct = (req, res, next) => {
 
 exports.getProducts = (req, res, next) => {
   Product.find()
+  // .populate('userId', 'name') //It used to show all data related to userId
+  // .select('title price -_id') //It filters our required columns
     .then(products => {
       console.log(products);
       res.render('admin/products', {
