@@ -9,10 +9,10 @@ router.get('/login', authController.getLogin);
 
 router.post('/login', authController.postLogin);
 
-router.post('/logout', isAuth, authController.postLogout);
+router.post('/logout', authController.postLogout);
 
-router.get('/signup', isAuth, authController.getSignup);
+router.get('/signup', authController.getSignup);
 
-router.post('/signup', isAuth, authController.postSignup);
+router.post('/signup', authController.postSignup);
 
 module.exports = router;
