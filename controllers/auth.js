@@ -56,7 +56,7 @@ exports.postSignup = (req, res, next) => {
   User.findOne({ email: email })
     .then(user => {
       if (user) {
-        req.flash('error', 'User with same email already exists.');
+        req.flash('error', 'User with same email already exists. Use another email');
         return res.redirect('/signup');
       } else {
         return bcrypt.hash(password, 12)
