@@ -15,14 +15,14 @@ exports.postAddProduct = (req, res, next) => {
   const price = req.body.price;
   const description = req.body.description;
   const product = new Product(
-    { 
+    {
       title: title,
       price: price,
       description: description,
       imageUrl: imageUrl,
       userId: req.user._id
     }
-    );
+  );
   product
     .save()
     .then(result => {
@@ -66,25 +66,28 @@ exports.postEditProduct = (req, res, next) => {
 
   Product.findById(prodId)
     .then(product => {
+      if (JSON.stringify(product.userId) !== JSON.stringify(req.user.id)) {
+        return res.redirect('/')
+      }
       product.title = updatedTitle;
       product.price = updatedPrice;
       product.description = updatedDesc;
       product.imageUrl = updatedImageUrl;
-      return product.save();
+      return product.save().then(result => {
+        console.log("Product Updated Successfully!")
+        console.log(result);
+        res.redirect('/admin/products')
+      });
     })
-    .then(result => {
-      console.log("Product Updated Successfully!")
-      console.log(result);
-      res.redirect('/admin/products')
-    })
+
     .catch(err => console.log(err))
 
 };
 
 exports.getProducts = (req, res, next) => {
-  Product.find()
-  // .populate('userId', 'name') //It used to show all data related to userId
-  // .select('title price -_id') //It filters our required columns
+  Product.find({ userId: req.user._id })
+    // .populate('userId', 'name') //It used to show all data related to userId
+    // .select('title price -_id') //It filters our required columns
     .then(products => {
       console.log(products);
       res.render('admin/products', {
@@ -99,7 +102,7 @@ exports.getProducts = (req, res, next) => {
 
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
-  Product.findByIdAndRemove(prodId)
+  Product.deleteOne({ _id: prodId, userId: req.user._id })
     .then(() => {
       console.log('DESTROYED PRODUCT');
       res.redirect('/admin/products');
