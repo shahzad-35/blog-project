@@ -1,28 +1,56 @@
 <%- include('../includes/head.ejs') %>
-    <link rel="stylesheet" href="/css/forms.css">
-    <link rel="stylesheet" href="/css/auth.css">
-    </head>
+  <link rel="stylesheet" href="/css/forms.css">
+  <link rel="stylesheet" href="/css/auth.css">
+  </head>
 
-    <body>
-        <%- include('../includes/navigation.ejs') %>
+  <body>
+    <%- include('../includes/navigation.ejs') %>
+      <section class="vh-100">
+        <% if(errorMessage) { %>
+          <div class="user-message user-message--error">
+            <%=errorMessage %>
+          </div>
+          <%}%>
+            <div class="container py-5">
+              <div class="row justify-content-center align-items-center">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                  <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                    <div class="card-body text-center">
 
-            <main>
-                <% if(errorMessage) { %>
-                    <div class="user-message user-message--error">
-                        <%=errorMessage %>
-                    </div>
-                    <%}%>
+                      <div>
+
+                        <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                        <p class="text-white-50 mb-5">Please enter your login and password!</p>
                         <form class="login-form" action="/login" method="POST">
-                            <div class="form-control">
-                                <label for="title">Email</label>
-                                <input type="text" name="email" id="email">
-                            </div>
-                            <div class="form-control">
-                                <label for="password">Password</label>
-                                <input type="password" name="password" id="password">
-                            </div>
-                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                            <button class="btn" type="submit">Login</button>
+                          <div class="form-outline form-white">
+                            <label class="form-label" for="email">Email</label>
+                            <input class="form-control form-control-lg" type="text" name="email" id="email">
+                          </div>
+
+                          <div class="form-outline form-white">
+                            <label class="form-label" for="password">Password</label>
+                            <input class="form-control form-control-lg" type="password" name="password" id="password">
+                          </div>
+                          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                          <p><a class="text-white-50" href="/reset">Forgot password?</a></p>
+
+                          <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+
+                          <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                            <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                            <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                            <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                          </div>
                         </form>
-            </main>
-            <%- include('../includes/end.ejs') %>
+                        <!-- <div class="centered">
+                          <a href="/reset">Reset Password</a>
+                        </div> -->
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </section>
+      <%- include('../includes/end.ejs') %>

@@ -1,36 +1,73 @@
 <%- include('../includes/head.ejs') %>
     <link rel="stylesheet" href="/css/forms.css">
     <link rel="stylesheet" href="/css/auth.css">
-</head>
+    </head>
 
-<body>
-   <%- include('../includes/navigation.ejs') %>
+    <body>
+        <%- include('../includes/navigation.ejs') %>
 
-    <main>
-        <% if(errorMessage) { %>
-            <div class="user-message user-message--error">
-                <%=errorMessage %>
-            </div>
-            <%}%>
-        <form class="login-form" action="/signup" method="POST">
-            <div class="form-control">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name">
-            </div>
-            <div class="form-control">
-                <label for="email">E-Mail</label>
-                <input type="email" name="email" id="email">
-            </div>
-            <div class="form-control">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password">
-            </div>
-            <div class="form-control">
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" name="confirmPassword" id="confirmPassword">
-            </div>
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <button class="btn" type="submit">Signup</button>
-        </form>
-    </main>
-<%- include('../includes/end.ejs') %>
+            <section class="vh-100">
+                <% if(errorMessage) { %>
+                    <div class="user-message user-message--error">
+                        <%=errorMessage %>
+                    </div>
+                    <%}%>
+                        <div class="container py-5">
+                            <div class="row justify-content-center align-items-center">
+                                <div class="col-12 col-md-8 col-lg-6">
+                                    <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                                        <div class="card-body text-center">
+
+                                            <div>
+
+                                                <h2 class="fw-bold mb-4 text-uppercase">Signup</h2>
+                                                <form class="login-form" action="/signup" method="POST">
+                                                    <div class="form-outline form-white">
+                                                        <label class="form-label" for="name">Name</label>
+                                                        <input class="form-control form-control-lg"
+                                                             your Name" type="text" name="name"
+                                                            id="name">
+                                                    </div>
+                                                    <div class="form-outline form-white">
+                                                        <label class="form-label" for="email">Email</label>
+                                                        <input class="form-control form-control-lg"
+                                                             type="text"
+                                                            name="email" id="email">
+                                                    </div>
+
+                                                    <div class="form-outline form-white">
+                                                        <label class="form-label" for="password">Password</label>
+                                                        <input class="form-control form-control-lg"
+                                                             type="password"
+                                                            name="password" id="password">
+                                                    </div>
+                                                    <div class="form-outline form-white">
+                                                        <label class="form-label" for="confirmPassword">Confirm
+                                                            Password</label>
+                                                        <input class="form-control form-control-lg"
+                                                             type="password"
+                                                            name="confirmPassword" id="confirmPassword">
+                                                    </div>
+                                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                                                    <button class="btn btn-outline-light btn-lg px-5"
+                                                        type="submit">Signup</button>
+
+                                                    <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                                                        <a href="#!" class="text-white"><i
+                                                                class="fab fa-facebook-f fa-lg"></i></a>
+                                                        <a href="#!" class="text-white"><i
+                                                                class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                                                        <a href="#!" class="text-white"><i
+                                                                class="fab fa-google fa-lg"></i></a>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            </section>
+            <%- include('../includes/end.ejs') %>
