@@ -26,27 +26,28 @@
                                                         <label class="form-label" for="name">Name</label>
                                                         <input class="form-control form-control-lg"
                                                              type="name" name="name"
-                                                            id="name">
+                                                            id="name" value="<%= oldInput.name%>">
                                                     </div>
                                                     <div class="form-outline form-white">
                                                         <label class="form-label" for="email">Email</label>
                                                         <input class="form-control form-control-lg"
                                                              type="email"
-                                                            name="email" id="email">
+                                                            name="email" id="email" value="<%= oldInput.email%>">
                                                     </div>
 
                                                     <div class="form-outline form-white">
                                                         <label class="form-label" for="password">Password</label>
                                                         <input class="form-control form-control-lg"
                                                              type="password"
-                                                            name="password" id="password">
+                                                            name="password" id="password" value="<%= oldInput.password%>">
                                                     </div>
                                                     <div class="form-outline form-white">
                                                         <label class="form-label" for="confirmPassword">Confirm
                                                             Password</label>
                                                         <input class="form-control form-control-lg"
                                                              type="password"
-                                                            name="confirmPassword" id="confirmPassword">
+                                                            name="confirmPassword" id="confirmPassword" 
+                                                            value="<%= oldInput.confirmPassword%>">
                                                     </div>
                                                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
